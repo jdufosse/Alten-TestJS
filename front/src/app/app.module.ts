@@ -8,9 +8,11 @@ import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/app.component';
 import { BaseModule } from 'app/base/base.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { ProductsComponent } from './products/products.component';
+import { ProductsAdminComponent } from './products-admin/products-admin.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ProductsComponent, ProductsAdminComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
