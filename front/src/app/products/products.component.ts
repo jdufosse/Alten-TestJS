@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
 
-  constructor() { }
+  private _jsonURL = 'assets/products.json'
+  @Input() public items: any[] = []
 
-  ngOnInit(): void {
+  constructor(private http: HttpClient) {
+    this.getJSON().subscribe(data => {
+      console.log(data);
+      this.items = data.data
+     });
   }
 
+  private getJSON(): Observable<any> {
+    return this.http.get(this._jsonURL);
+  }
 }
