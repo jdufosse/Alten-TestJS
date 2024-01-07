@@ -6,7 +6,7 @@ class ProductManagerMock {
 
     constructor() {
         this.#products = products
-        this.#nextProductId = this.#products.reduce((a, p) => Math.max(a, p.id), -Infinity); + 1
+        this.#nextProductId = this.#products.reduce((a, p) => Math.max(a, p.id), -Infinity) + 1
     }
 
     getAll = () => {
@@ -14,24 +14,27 @@ class ProductManagerMock {
     }
 
     getOne = (productId) => {
-        return this.#products.find(p => p.id === productId)
+        return this.#products.find(p => p.id == productId)
     }
 
     create = (product) => {
-        product.id = this.#nextProductId++
+        product.id = this.#nextProductId
+        this.#nextProductId++
         this.#products.push(product)
     }
 
     update = (productId, product) => {
-        productFromMock = this.getOne(productId)
+        const productFromMock = this.getOne(productId)
         Object.entries(product).forEach(([key, value]) => {
-            this.productFromMock[key] = value
+            if (key !== 'id') {
+                productFromMock[key] = value
+            }
         })
     }
 
     delete = (productId) => {
-        this.#products.filter(p => p.id !== productId)
+        this.#products = this.#products.filter(p => p.id != productId)
     }
 }
-
-module.exports = new ProductManagerMock()
+const productManager = new ProductManagerMock()
+module.exports = productManager
