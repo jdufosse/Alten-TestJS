@@ -2,23 +2,23 @@
     <ng-template #gridItemTemplate let-item>
         <article *ngIf="item">
             <section>
-                <span class="pi pi-tag"></span>
-                <div>{{item.category}}</div>
+                <div>
+                    <span class="pi pi-tag"></span>
+                    {{item.category}}
+                </div>
                 <div>{{item.inventoryStatus}}</div>
             </section>
             <section>
                 <div>{{item.name}}</div>
                 <div>{{item.description}}</div>
-                <div *ngIf="item.rating">
-                    <ul *ngFor="let rate of [1,2,3,4,5]">
-                        <li [ngClass]="item.rating >= rate ? 'pi pi-star-fill': 'pi pi-star'"></li>
-                    </ul>
-                </div>
-                
+                <ul *ngIf="item.rating">
+                    <li *ngFor="let rate of [1,2,3,4,5]"
+                        [ngClass]="item.rating >= rate ? 'pi pi-star-fill': 'pi pi-star'"></li>
+                </ul>
             </section>
             <section>
-                {{item.category}}
-                <button pButton pRipple icon="pi pi-shopping-cart" class="h-45"></button>
+                ${{item.price}}
+                <button pButton pRipple icon="pi pi-shopping-cart" class="h-45" [disabled]="item.quantity == 0"></button>
             </section>
         </article>
     </ng-template>
@@ -26,6 +26,7 @@
         {{item.name}}
     </ng-template>
 
-    <app-list [items]="items" [listItemTemplate]="listItemTemplate" [gridItemTemplate]="gridItemTemplate" [selectable]="true">    
+    <app-list [items]="items" [listItemTemplate]="listItemTemplate" [gridItemTemplate]="gridItemTemplate"
+        [selectable]="true">
     </app-list>
 </div>
