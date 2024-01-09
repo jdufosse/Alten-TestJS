@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ProductsService } from 'app/products-admin/products.service';
 
 @Component({
   selector: 'app-products',
@@ -8,18 +7,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
-
-  private _jsonURL = 'assets/products.json'
   @Input() public items: any[] = []
 
-  constructor(private http: HttpClient) {
-    this.getJSON().subscribe(data => {
-      console.log(data);
-      this.items = data.data
-     });
-  }
+  constructor(private productService: ProductsService) { }
 
-  private getJSON(): Observable<any> {
-    return this.http.get(this._jsonURL);
+  ngOnInit(): void {
+    this.productService.getAllProduct().subscribe(data => {
+      console.log(data);
+      this.items = data
+    });
   }
 }

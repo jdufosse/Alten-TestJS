@@ -1,5 +1,6 @@
 <div class="main-container">
-    <app-table [data]="data" [config]="config">
-        
+    <app-table #table [data]="data" [config]="config" [selectable]="true" [allowAdd]="true" [allowDelete]="true"
+        [allowEdit]="true" [entity]="entity">
+
     </app-table>
 </div>

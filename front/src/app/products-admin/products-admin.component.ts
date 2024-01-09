@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Product } from 'app/products/product.model';
+import { TableComponent } from 'app/shared/ui/table/table.component';
 import { ControlType } from 'app/shared/utils/crud-item-options/control-type.model';
 import { CrudItemOptions } from 'app/shared/utils/crud-item-options/crud-item-options.model';
-import { Observable } from 'rxjs';
+import { ProductsService } from './products.service';
 
 @Component({
   selector: 'app-products-admin',
@@ -10,36 +11,32 @@ import { Observable } from 'rxjs';
   styleUrls: ['./products-admin.component.scss']
 })
 export class ProductsAdminComponent implements OnInit {
-
-  private _jsonURL = 'assets/products.json'
   @Input() public data: any[] = []
   @Input() public config: CrudItemOptions[] = []
+  @Input() public readonly entity = Product
+  @ViewChild('table') table: TableComponent<Product>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private productService: ProductsService) { }
 
   ngOnInit(): void {
-    this.getJSON().subscribe(data => {
+    this.productService.getAllProduct().subscribe(data => {
       console.log(data);
-      this.data = data.data
+      this.data = data
 
-      if(this.data?.length){
+      if (this.data?.length) {
         this.config = Object.keys(this.data[0]).map(key => {
           return {
             key,
-            label : key,
-            controlType : ControlType.AUTOCOMPLETE,
-            columnOptions : {
-              default : true,
-              sortable : true,
-              filterable : true
+            label: key,
+            controlType: ControlType.AUTOCOMPLETE,
+            columnOptions: {
+              default: true,
+              sortable: true,
+              filterable: true
             }
           }
         })
       }
-     });
-  }
-
-  private getJSON(): Observable<any> {
-    return this.http.get(this._jsonURL);
+    });
   }
 }
