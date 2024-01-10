@@ -1,6 +1,6 @@
 <div class="main-container">
     <app-table #table [data]="data" [config]="config" [selectable]="true" [allowAdd]="true" [allowDelete]="true"
-        [allowEdit]="true" [entity]="entity">
+        [allowEdit]="true" [entity]="entity" (saved)="saved($event)" (deleted)="deleted($event)">
 
     </app-table>
 </div>

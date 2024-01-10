@@ -14,18 +14,18 @@ module.exports = {
     create: (req, res) => {
         console.log('products - create')
         products.create(req.body)
-        res.sendStatus(200)
+        res.sendStatus(204)
     },
 
     update: (req, res) => {
         console.log('products - update')
         products.update(req.params.productId, req.body)
-        res.sendStatus(200)
+        res.sendStatus(204)
     },
 
     delete: (req, res) => {
         console.log('products - delete')
         products.delete(req.params.productId)
-        res.sendStatus(200)
+        res.sendStatus(204)
     }
 }

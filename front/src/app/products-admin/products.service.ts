@@ -12,19 +12,23 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {}
 
-  public getAllProduct(): Observable<any> {
+  public getAll(): Observable<any> {
     return this.http.get(this._backURL);
   }
 
-  // public getOneProduct(productId : number): Observable<Product> {
-  //   return this.http.get(this._jsonURL);
-  // }
+  public getOne(productId : number): Observable<any> {
+    return this.http.get(this._backURL);
+  }
 
-  // public getJSON(): Observable<Product> {
-  //   return this.http.get(this._jsonURL);
-  // }
-  // public getJSON(): Observable<Product> {
-  //   return this.http.get(this._jsonURL);
-  // }
+  public add(product: Product): Observable<any> {
+    return this.http.post(this._backURL, product);
+  }
+  
+  public update(product: Product): Observable<any> {
+    return this.http.patch(`${this._backURL}/${product.id}`, product);
+  }
 
+  public delete(id: number): Observable<any>{
+    return this.http.delete(`${this._backURL}/${id}`);
+  }
 }
