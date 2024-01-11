@@ -1,76 +1,85 @@
+import { ColumnOptions } from "app/shared/utils/crud-item-options/column-options.model";
 import { ControlType } from "app/shared/utils/crud-item-options/control-type.model";
 import { CrudItemOptions } from "app/shared/utils/crud-item-options/crud-item-options.model";
+import { ProductInformation } from "./PRODUCT_ITEMS";
+import { SelectItem } from "primeng/api";
 
 const controlType = ControlType.INPUT
 const type = 'text'
 
-const columnOptions ={
+const columnOptions: ColumnOptions = {
   default: true,
   sortable: true,
   filterable: true,
 }
 
+const categories: SelectItem[] = ProductInformation.categories.map(category => ({ value: category, label: category }))
+const stockStatus: SelectItem[] = ProductInformation.inventoryStatus.map(status => ({ value: status, label: status }))
+
+
 export const CONFIG_ITEMS: CrudItemOptions[] = [
   {
-    key:'id',
+    key: 'id',
     label: 'Id',
     controlType,
     type,
-    columnOptions: {...columnOptions, hidden:true},
-    controlOptions:{
+    columnOptions: { ...columnOptions, hidden: true },
+    controlOptions: {
       hideOnCreate: true,
       hideOnUpdate: true
     }
-  },{
-    key:'code',
+  }, {
+    key: 'code',
     label: 'Code',
     controlType,
     type,
     columnOptions,
-  },{
-    key:'name',
+  }, {
+    key: 'name',
     label: 'Name',
     controlType,
     type,
     columnOptions
-  },{
-    key:'description',
+  }, {
+    key: 'description',
     label: 'Description',
     controlType,
     type,
     columnOptions
-  },{
-    key:'image',
+  }, {
+    key: 'image',
     label: 'Image',
     controlType,
     type,
     columnOptions
-  },{
-    key:'price',
+  }, {
+    key: 'price',
     label: 'Price',
     controlType,
     type,
     columnOptions
-  },{
-    key:'category',
+  }, {
+    key: 'category',
     label: 'Category',
-    controlType,
+    controlType: ControlType.SELECT,
     type,
-    columnOptions
-  },{
-    key:'quantity',
+    columnOptions,
+    options: categories
+  }, {
+    key: 'quantity',
     label: 'Quantity',
     controlType,
     type,
     columnOptions
-  },{
-    key:'inventoryStatus',
+  }, {
+    key: 'inventoryStatus',
     label: 'Inventory status',
-    controlType,
+    controlType: ControlType.SELECT,
     type,
-    columnOptions
-  },{
-    key:'rating',
+    columnOptions,
+    options: stockStatus,
+  }, {
+    key: 'rating',
     label: 'Rating',
     controlType,
     type,
