@@ -18,8 +18,8 @@ export class ProductsAdminComponent implements OnInit {
   @Input() public readonly entity = Product
   @ViewChild('table') table: TableComponent<Product>;
 
-  constructor(private productService: ProductsService,
-    private snackbarService: SnackbarService) { }
+  constructor(private readonly productService: ProductsService,
+    private readonly snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
     this.loadProducts()

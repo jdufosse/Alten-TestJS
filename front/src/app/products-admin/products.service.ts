@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ProductsService {
   private _backURL = 'http://localhost:3000/products'
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   public getAll(): Observable<any> {
     return this.http.get(this._backURL);
