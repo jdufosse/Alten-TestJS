@@ -27,8 +27,8 @@ export class ProductsAdminComponent implements OnInit {
 
   saved(product: Product): void {
     const method = (this.table.creation)
-      ? this.productService.add
-      : this.productService.update
+      ? this.productService.add.bind(this.productService)
+      : this.productService.update.bind(this.productService)
 
     method(product).subscribe({
       next: () => {

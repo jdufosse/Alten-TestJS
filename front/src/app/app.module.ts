@@ -10,6 +10,7 @@ import { BaseModule } from 'app/base/base.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { ProductsComponent } from './products/products.component';
 import { ProductsAdminComponent } from './products-admin/products-admin.component';
+import { ProductsService } from './products-admin/products.service';
 
 @NgModule({
   declarations: [AppComponent, ProductsComponent, ProductsAdminComponent],
@@ -22,7 +23,8 @@ import { ProductsAdminComponent } from './products-admin/products-admin.componen
     BaseModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'en' }
+    { provide: LOCALE_ID, useValue: 'en' },
+    ProductsService
   ],
   bootstrap: [AppComponent]
 })
